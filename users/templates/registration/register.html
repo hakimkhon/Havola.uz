@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register User</title>
+</head>
+<body>
+    <h1>Registration Form </h1>
+    <form action='' method='POST'>
+        {{form.as_p}}
+        {% csrf_token %}
+        {% comment %} {% if  %}{% else %}{% endif %} {% endcomment %}
+
+        <input type='submit' value="Ro'yxatdan o'tish"/>
+    </form>
+    <button><a href="{% url 'users:custom_register' %}">
+        Ro'yxatdan o'tish 2
+    </a></button>
+    <button><a href="{% url 'users:register' %}">
+        Ro'yxatdan o'tish
+    </a></button>
+    <button><a href="{% url 'users:custom_login' %}">
+        oldin ro'yxatdan o'tganman
+    </a></button>
+    
+</body>
+</html>

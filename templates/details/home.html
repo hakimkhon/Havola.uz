@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'link/css/style.css' %}">
+{% endblock %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content%}
+
+<h1 style="text-align:center">Bosh sahiya</h1>
+<br>
+<ul>
+    <li><a href="{% url 'link:link_list' %}" style="padding: 5px 7px; background: blue; color: white;">
+        linklar</a>
+    </li>
+    <br>
+    <li><a href="{% url 'users:register' %}" style="padding: 5px 7px; background: blue; color: white;">
+        Ro'yxatdan o'tish</a>
+    </li><br>
+    <li><a href="{% url 'users:login' %}" style="padding: 5px 7px; background: blue; color: white;">
+        kirish</a>
+    </li>
+</ul>
+<hr class="hr">
+<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum, impedit iure aliquam asperiores voluptatum aperiam,
+    fugit ut sint nulla quis ipsa quaerat aut. Repellendus id architecto dignissimos corporis beatae adipisci!</p>
+{% comment %} <img src="{% static 'img/img1.jpg' %}" alt="" width="100"> {% endcomment %}
+
+{% endblock %}
+
+{% block js_files %}
+<script src="{% static 'link/js/script.js' %}"></script>
+{% endblock %}

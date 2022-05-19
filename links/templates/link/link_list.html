@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'link/css/style.css' %}">
+{% endblock %}
+
+{% block title %} Link List {% endblock %}
+
+{% block content%}
+
+<h1 style="text-align:center">Havolalar</h1>
+
+{% for list in linklar %}
+<h2 style="padding:10px; background: #808082; border: 1px solid #808080; margin: 5px 500px;">
+    <a href="{% url 'link:link_detail' list.pk %}" style="text-decoration: none; color: black;">
+        {{list.id}} {{list.name}}
+    </a>
+</h2>
+{% endfor %}
+<div class="btn" style="display: flex; justify-content: center;">
+    <button style="padding: 4px 8px; border: none; background: blue; margin-right: 4px;">
+        <a href="{% url 'link:home' %}" style="text-decoration: none; color: white;">Home</a>
+    </button>
+    <button style="padding: 4px 8px; border: none; background: blue;">
+        <a href="{% url 'link:link_create' %}" style="text-decoration: none; color: white;">link qo'shish</a>
+    </button>
+</div>
+{% endblock %}

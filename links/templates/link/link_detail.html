@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Link Detail{% endblock %}
+
+{% block content%}
+
+<h1 style="text-align:center">Detail</h1>
+
+<div style="background: lightgray; padding: 10px;">
+  <h1>{{link.name}}</h1>
+  <p>{{link.description}}</p>
+  <a href="{{link.url}}" style="padding: 5px 7px; background: blue; color: white;">
+    havolaga o'tish
+  </a>
+  <hr class="hr">
+
+  <a href="{% url 'link:home' %}" style="padding: 5px 7px; background: blue; color: white;">
+    otrga qaytish
+  </a>
+  <hr class="hr">
+
+  <a href="{% url 'link:link_update' link.pk %}" style="padding: 5px 7px; background: blue; color: white;">
+    O'zgartirish
+  </a>
+  <p> 
+    {{ link.creted_at }}
+    {% comment %}
+      {{ link.creted_at|date:"D d M Y" }}
+      {{ link.creted_at|time:"H:i" }}
+    {% endcomment %}
+  </p>
+</div>
+
+{% endblock %}

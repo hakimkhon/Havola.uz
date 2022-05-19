@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Link Update{% endblock %}
+
+{% block content%}
+
+<h1 style="text-align:center">Havolani taxrirlash</h1>
+
+<form action="" method="POST" class="" id="" enctype="multipart/form-data">
+  {{form.as_p}}
+  <input type="submit" value="Yuborish">
+  {% csrf_token %}
+</form>
+<br>
+<a href="{% url 'link:link_list' %}" style="padding: 5px 7px; background: blue; color: white;">
+  otrga qaytish
+</a>
+<p>'Yuborish' tugmasi bosilganda kiritilgan malumotlar
+  serverga POST metodi orqali yuboriladi</p>
+
+{% endblock %}

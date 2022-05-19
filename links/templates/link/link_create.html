@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Link Create{% endblock %}
+
+{% block content%}
+
+<h1 style="text-align:center">Havola qo'shish</h1>
+{% comment %} <form action="" method="POST"  class="" id="">
+        
+  <label for="">Link name:</label> <br>
+  <input type="text" name="name" placeholder="link nomini yozing..."
+       value="{{data.name}}"    required />
+  <small style="color:red;"> {% if errors.name %}{{errors.name}}{% endif %} </small>
+  <br><br>
+
+  <label for="">Link description:</label> <br>
+  <textarea name="description" placeholder="link haqida izoh.."
+      >{{data.description}}</textarea>
+  </br><br>
+  
+  <label for=""> Link url</label> </br>
+  <input type="text" name="url" placeholder="link urlini ko'rsating" 
+      value="{{data.url}}" required />
+  <small style="color:red;"> {% if errors.url %}{{errors.url}}{% endif %} </small>
+  
+  <br><br>
+  
+  <input type="submit" value="Yuborish">
+  {% csrf_token %}
+</form>  {% endcomment %}
+
+
+<form method="POST"> {% csrf_token %}
+  {{form.as_p}}
+   
+  <input type="submit" value="Yuborish">
+</form>
+
+<br>
+<a href="{% url 'link:link_list' %}" style="padding: 5px 7px; background: blue; color: white;">
+  otrga qaytish
+</a>
+<p>'Yuborish' tugmasi bosilganda kiritilgan malumotlar
+  serverga POST metodi orqali yuboriladi</p>
+
+{% endblock %}
