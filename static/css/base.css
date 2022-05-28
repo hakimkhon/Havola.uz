@@ -1,3 +1,10 @@
 * {
     border: 0px grey solid;
 }
+
+:root{
+    --bgbody: #FCF9F6
+}
+body{
+    background: var(--bgbody);
+}

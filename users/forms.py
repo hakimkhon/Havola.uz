@@ -1,4 +1,3 @@
-import email
 from django import forms
 from django.forms.widgets import PasswordInput
 from django.contrib.auth.forms import AuthenticationForm
@@ -6,39 +5,40 @@ from .models import User
 
 class LoginForm(forms.Form):
     
-    email = forms.EmailField(required=True)
+    username = forms.CharField(required=True)
     password = forms.CharField(required=True, widget=PasswordInput)
 
     def clean_username(self):
-        email = self.cleaned_data['email']
-        if not User.objects.filter(email=email).exists(): # -> true yoki false qaytaradi
-            raise forms.ValidationError('bunday username ga ega foydalanuvchi topilmadi')
-        return email
+        username = self.cleaned_data['username']
+        if not User.objects.filter(username=username).exists():
+            raise forms.ValidationError('Bunday username ga ega foydalanuvchi topilmadi.')
+        return username
     
     def clean_password(self):
-        email = self.cleaned_data.get("email")
-        password = self.cleaned_data["password"]
-        if email:
-            user = User.objects.filter(email=email).first()
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data['password']
+        if username:
+            user = User.objects.filter(username=username).first()
             if user:
                 if not user.check_password(password):
-                    raise forms.ValidationError("parol noto'gri")
+                    raise forms.ValidationError('Parol notog\'ri')
         return password
 
+
 class RegisterForm(forms.ModelForm):
-    email = forms.EmailField(max_length=120, required=True, label='Elektron pochta')
-    password = forms.CharField(max_length=100, label='Parolni kiriting',
+    email = forms.EmailField(max_length=120, required=True, label='Elektron Pochta')
+    password = forms.CharField(max_length=100, label='Parol',
                         widget=forms.PasswordInput(attrs={'class': 'special'}))
-    password_confirmation = forms.CharField(max_length=100, label='Parolni tasdiqlang', widget=forms.PasswordInput)
+    password_confirmation = forms.CharField(max_length=100, label='Parolni tasdiqlash',
+                        widget=forms.PasswordInput)
     
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'password']
-        
         labels = {
-            'first_name': 'Ism',        
-            'last_name': 'Famila',        
-            }
+            'first_name': 'Ism',
+            'last_name': 'Familiya'
+        }
     # password_confirmation.widget.attrs.update({'class': 'special'})
     # password_confirmation.widget.attrs.update(size='40')
 
@@ -59,8 +59,8 @@ class RegisterForm(forms.ModelForm):
             raise forms.ValidationError('Tasdiqlash paroli notogri')
         return confirm_password
 
-    def clean_username(self):
+    def clean_email(self):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
-            raise forms.ValidationError('Ushbu email sistemada ro\'yxatdan o\'tgan')
+            raise forms.ValidationError('Ushbu email sistemada ro\'yxatdan o\'tkazilgan.')
         return email

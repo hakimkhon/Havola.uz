@@ -3,12 +3,6 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
-
-
-
-
-
-
 # from core.forms import RegisterForm # AuthenticationForm - login uchun form
 # from core.forms import RegisterForm
 from .forms import LoginForm, RegisterForm
@@ -17,6 +11,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 
 USER = get_user_model()
+# USER = settings.AUTH_USER_MODEL
 
 @login_required
 def check_user(request):
@@ -48,9 +43,9 @@ def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data['email']
+            username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = USER.objects.get(email=email)
+            user = User.objects.get(username=username)
             login(request, user)
             return redirect(settings.LOGIN_REDIRECT_URL) # /users/check-user
 
@@ -73,7 +68,6 @@ def register_view(request):
     if request.method == 'POST':
         if form.is_valid():
             fields = form.cleaned_data
-            # fields.pop('password_confirmation')
             del fields['password_confirmation']
             user = USER.objects.create_user(**fields)
             # user.set_password(password)

@@ -23,8 +23,8 @@
           </a> 
         {% endif %}
         {% if not user.is_authenticated %}
-        <a href="{% url 'users:login' %}" style="padding: 5px 7px; background: blue; color: white;">
-          kirish
+        <a href="{% url 'users:custom_register' %}" style="padding: 5px 7px; background: blue; color: white;">
+          ro'yxatdan o'tish
         </a>
         {% endif %}
       </div>
