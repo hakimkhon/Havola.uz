@@ -9,6 +9,7 @@ from .forms import LoginForm, RegisterForm
 from django.contrib.auth import login, logout
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from .models import User
 
 USER = get_user_model()
 # USER = settings.AUTH_USER_MODEL
